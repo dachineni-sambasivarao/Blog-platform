@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marginalia — a small blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead__row">
+    <a href="#/" class="masthead__title" data-link>Marginalia</a>
+    <nav class="masthead__nav">
+      <a href="#/" data-link>All Posts</a>
+      <a href="#/new" data-link class="auth-only" hidden>Write</a>
+      <span class="masthead__user guest-only">
+        <a href="#/login" data-link class="masthead__login">Log in</a>
+        <a href="#/register" data-link class="masthead__cta">Sign up</a>
+      </span>
+      <span class="masthead__user auth-only" hidden>
+        <span class="masthead__hello">Signed in as <strong id="nav-username">—</strong></span>
+        <button id="logout-btn" class="link-btn">Log out</button>
+      </span>
+    </nav>
+  </div>
+  <div class="masthead__rule"></div>
+  <p class="masthead__tagline">Notes, essays, and marginal thoughts — from people, not algorithms.</p>
+</header>
+
+<main id="app" class="app"></main>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<footer class="site-footer">
+  <p>Marginalia — a demo blogging platform. Built with Express, SQLite, and vanilla JS.</p>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
