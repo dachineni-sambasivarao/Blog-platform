@@ -6,6 +6,7 @@ if (!process.env.JWT_SECRET) {
   process.exit(1);
 }
 
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
@@ -35,8 +36,17 @@ app.use('/api/posts/:postId/comments', commentRoutes);
 // Direct comment access for edit/delete: PUT/DELETE /api/comments/:id
 app.use('/api/comments', commentRoutes);
 
-// 404 handler
-app.use((req, res) => res.status(404).json({ error: 'Not found.' }));
+// Serve the frontend as static files (so backend + frontend deploy as one service)
+const frontendPath = path.join(__dirname, '..', 'frontend');
+app.use(express.static(frontendPath));
+
+// 404 handler for unmatched /api routes; everything else falls back to the SPA's index.html
+app.use((req, res) => {
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'Not found.' });
+  }
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 // Central error handler (catches thrown/rejected errors from route handlers)
 app.use((err, req, res, next) => {

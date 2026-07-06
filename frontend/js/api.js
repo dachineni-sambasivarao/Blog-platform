@@ -1,6 +1,8 @@
 // api.js — thin wrapper around fetch() for talking to the backend REST API.
 
-const API_BASE = window.API_BASE || 'http://localhost:4000/api';
+// Relative path works automatically since the backend now serves this frontend too.
+// Override with window.API_BASE before this script loads if you ever split them across origins.
+const API_BASE = window.API_BASE || '/api';
 
 const TOKEN_KEY = 'blog_token';
 const USER_KEY = 'blog_user';
